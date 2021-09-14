@@ -1,60 +1,62 @@
-# git dojo 🥋
+# git reset HEAD~ 🤯
 
-Welcome to the git dojo! The goal of this dojo is for you to master some common day-to-day git commands, such as:
-- `git reset HEAD~<N>`
-- `git commit --amend`
-- `git rebase --interactive`
+This command is to **untie recent commits**, back from the **Nth last commit** up to **HEAD**.
 
-Each set of command exercises has its own branch, namely:
-- `git-reset-head`
-- `git-commit-amend`
-- `git-rebase-i`
+The **only commands you can use** are:
 
-**Do note** that this tutorial is supposed to be done ***exclusively from the command line***. No graphical tool is allowed.
+- `git reset HEAD~`
+- `git reset HEAD~ --hard`
+- `git reset HEAD~<N>` (e.g. `git reset HEAD~3`)
+- `git rm <file>` (e.g. `git rm README.md`)
 
-## Setup
+You can also commit and force-push changes.
 
-Fork the project from the command line:
+Read along for instructions.
 
-1. in GitHub (or whichever git hosting service of choice), create a new project named « git-dojo »
-1. `git clone https://github.com/cooptalis-gprst/git-dojo`
-1. `cd git-dojo`
-1. `git remote set-url upstream https://github.com/cooptalist-gprst/git-dojo`
-1. `git remote set-url origin https://github.com/<your_username>/git-dojo`
+## First exercise
 
-Note that if you have an SSH key set up on GitHub, you could (and should) replace `https://github.com/<your_username>/git-dojo` with `git@github.com:<your_username>/git-dojo`.
+Some files are already committed. Unfortunately, you want to only keep files with an **even number in their name**. How would you do it?
 
-Once done, you can checkout to the dojo branches with the following commands:
+By the end of this step, the commit history should be:
 
-```bash
-git checkout --track upstream/<branch_name> # e.g. git checkout --track upstream/git-reset-head
-git push --set-upstream origin <branch_name> # e.g. git push --set-upstream origin git-reset-head
-```
+1. README for `git reset HEAD~<N>`
+1. Add files with an even number in their name
 
-Instructions will be in the README :)
+The last commit should not contain any file with an odd number in their name, and your working directory shouldn't contain any odd number file.
 
-## Useful command: take a peek at your commit history
+## Second exercise
 
-To have a quick peek at your commit history, `git log` would come in handy, but is quite verbose. If you want to display your commit history in a more compact way, with only the SHA of your commits followed by their names, you can use the `--oneline` option, like so:
+You now want to have one commit for each separate file. How would you do that?
 
-```bash
-git log --oneline
-```
+By the end of this step, the commit history should be:
 
-If you want only to see the last three commits, you cant use:
+1. README for `git reset HEAD~<N>`
+1. Add file-2
+1. Add file-4
+1. Add file-6
+1. Add file-8
+1. Add file-10
 
-```bash
-git log --oneline -3
-```
+## Third exercise
 
-As the command is quite long, you can set up a ✨git alias✨
+You don't want file-10 anymore. How would you make your commit history look like this?
 
-```bash
-git config --global alias.lo "log --oneline" # You can replace alias.lo by alias.unicorn or whatever
-```
+1. README for `git reset HEAD~<N>`
+1. Add file-2
+1. Add file-4
+1. Add file-6
+1. Add file-8
 
-Then, you would only need to type:
+file-10 should **not be in your working directory anymore**.
 
-```bash
-git lo -3 # Or: git unicorn -3
-```
+## Fourth exercise
+
+You finally want to have files which number is a **multiple of 4**. How would you make it possible?
+
+By the end of this step, your commit history should be:
+
+1. README for `git reset HEAD~<N>`
+1. Add file-4
+1. Add file-8
+
+Your working directory should **not contain any other file** than the ones committed.
