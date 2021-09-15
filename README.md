@@ -1,60 +1,65 @@
-# git dojo 🥋
+# git rebase --interactive 🕑
 
-Welcome to the git dojo! The goal of this dojo is for you to master some common day-to-day git commands, such as:
-- `git reset HEAD~<N>`
-- `git commit --amend`
-- `git rebase --interactive`
+This is where you learn to actually rewrite history in git :) With this command, you can for instance:
 
-Each set of command exercises has its own branch, namely:
-- `git-reset-head`
-- `git-commit-amend`
-- `git-rebase-i`
+- **edit** commits
+- change the **name** of commits
+- change the **order** of commits
+- **discard** commits
+- and much more
 
-**Do note** that this tutorial is supposed to be done ***exclusively from the command line***. No graphical tool is allowed.
+You basically become a wizard 🧙‍♂️
 
-## Setup
-
-Fork the project from the command line:
-
-1. in GitHub (or whichever git hosting service of choice), create a new project named « git-dojo »
-1. `git clone https://github.com/cooptalis-gprst/git-dojo`
-1. `cd git-dojo`
-1. `git remote set-url upstream https://github.com/cooptalist-gprst/git-dojo`
-1. `git remote set-url origin https://github.com/<your_username>/git-dojo`
-
-Note that if you have an SSH key set up on GitHub, you could (and should) replace `https://github.com/<your_username>/git-dojo` with `git@github.com:<your_username>/git-dojo`.
-
-Once done, you can checkout to the dojo branches with the following commands:
+The **only command you can use** is:
 
 ```bash
-git checkout --track upstream/<branch_name> # e.g. git checkout --track upstream/git-reset-head
-git push --set-upstream origin <branch_name> # e.g. git push --set-upstream origin git-reset-head
+git rebase -i HEAD~<N> # (e.g. git rebase -i HEAD~4)
 ```
 
-Instructions will be in the README :)
+You can also commit and force-push changes.
 
-## Useful command: take a peek at your commit history
+**Please read carefully git output**. git is quite verbose when you're doing an interactive rebase, and gives you some valuable hints about what are the steps you should follow.
 
-To have a quick peek at your commit history, `git log` would come in handy, but is quite verbose. If you want to display your commit history in a more compact way, with only the SHA of your commits followed by their names, you can use the `--oneline` option, like so:
+**You will also probably need to change git default editor**; otherwise, depending on your operating system (I'm looking at you, MacOS), you might end up using Vim, which might not be ideal. To do so, execute the following:
 
-```bash
-git log --oneline
-```
+- `git config --global core.editor nano` if you want to use nano as your editor of choice
+- `git config --global core.editor "code --wait"` if you want git to use VS Code
 
-If you want only to see the last three commits, you cant use:
+## First exercise
 
-```bash
-git log --oneline -3
-```
+Some files are already committed, with their name as content. Unfortunately, it appears some files have some weird content in it. You must fix them so that every file only contains their name (e.g. `file-1` must contain "file-1", `file-2` must contain "file-2", and so on). **The commit history must stay unchanged**, i.e. must look like this:
 
-As the command is quite long, you can set up a ✨git alias✨
+1. README for `git rebase -i`
+1. Add file-1
+1. Add file-2
+1. Add file-3
+1. Add file-4
+1. Add file-5
 
-```bash
-git config --global alias.lo "log --oneline" # You can replace alias.lo by alias.unicorn or whatever
-```
+## Second exercise
 
-Then, you would only need to type:
+You actually **don't want files with an odd number**. How would you make your commit history look like this?
 
-```bash
-git lo -3 # Or: git unicorn -3
-```
+1. README for `git rebase -i`
+1. Add file-2
+1. Add file-4
+
+Your working directory **must not contain files that are not committed**; file-1, file-3 and file-5 must not be in your working directory. They must be *gone* ✨
+
+## Third exercise
+
+You want to give fancier names to your commits, like this:
+
+1. docs(README): write instructions for `git rebase -i`
+1. feat(files): add the second file
+1. feat(files): add the fourth file
+
+Remember that the only command you can use, is `git rebase -i` 😉
+
+## Fourth exercise
+
+You want to **change the order of your commits**, so that your commit history looks like this:
+
+1. docs(README): init instructions for `git rebase -i`
+1. feat(files): add the fourth file
+1. feat(files): add the second file
